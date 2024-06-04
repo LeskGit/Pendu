@@ -34,6 +34,7 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
         // A implémenter
+         
         vuePendu.majAffichage();
     }
 }

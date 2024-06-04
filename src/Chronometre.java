@@ -22,7 +22,7 @@ public class Chronometre extends Text{
     /**
      * le contrôleur associé au chronomètre
      */
-    private ControleurChronometre actionTemps;
+    //private ControleurChronometre actionTemps;
 
     /**
      * Constructeur permettant de créer le chronomètre
@@ -30,7 +30,11 @@ public class Chronometre extends Text{
      * Ce constructeur créer la Timeline, la KeyFrame et le contrôleur
      */
     public Chronometre(){
-        // A implémenter
+        ControleurChronometre controleur = new ControleurChronometre(this);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(100),controleur);
+        Timeline timeline =new Timeline(keyFrame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     /**
@@ -39,7 +43,7 @@ public class Chronometre extends Text{
      * @param tempsMillisec la durée depuis à afficher
      */
     public void setTime(long tempsMillisec){
-        // A implémenter
+        
     }
 
     /**
