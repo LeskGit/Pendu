@@ -30,18 +30,24 @@ public class ControleurNiveau implements EventHandler<ActionEvent> {
         RadioButton radiobouton = (RadioButton) actionEvent.getTarget();
         String nomDuRadiobouton = radiobouton.getText();
         System.out.println(nomDuRadiobouton);
-        if (nomDuRadiobouton == "Facile") {
-        this.modelePendu.setNiveau(0);
-        }
-        else if (nomDuRadiobouton == "Normal") {
-            this.modelePendu.setNiveau(1);
-            }
-        else if (nomDuRadiobouton == "Difficle") {
-        this.modelePendu.setNiveau(2);
-        }
-        else if (nomDuRadiobouton == "Expert") {
-        this.modelePendu.setNiveau(3);
-        }
 
+        switch (nomDuRadiobouton) {
+            case "Facile":
+                this.modelePendu.setNiveau(0);
+                break;
+            case "Normal":
+                this.modelePendu.setNiveau(1);
+                break;
+            case "Difficile": // Correction de l'orthographe
+                this.modelePendu.setNiveau(2);
+                break;
+            case "Expert":
+                this.modelePendu.setNiveau(3);
+                break;
+            default:
+                // Optionnel: gérer les cas inattendus
+                System.out.println("Niveau inconnu: " + nomDuRadiobouton);
+                break;
+        }
     }
 }

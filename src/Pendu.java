@@ -89,7 +89,7 @@ public class Pendu extends Application {
      */
     @Override
     public void init() {
-        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, MotMystere.FACILE, 10);
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("img");
         this.chrono = new Chronometre();
@@ -102,6 +102,7 @@ public class Pendu extends Application {
         this.pg = new ProgressBar(0);
         this.dessin = new ImageView("pendu0.png");
         this.leNiveau = new Text();
+        this.niveaux = Arrays.asList("Facile", "Normal", "Difficile", "Expert");
     }
 
    
@@ -186,13 +187,34 @@ public class Pendu extends Application {
          draw.getChildren().addAll(this.dessin);
          draw.setPadding(new Insets(10,0,0,60));
          this.pg.setPadding(new Insets(10,0,0,150));
+        
          
+      
 
          first.getChildren().addAll(mc, draw, this.pg, this.clavier);
         
          VBox second = new VBox();
+         VBox niv = new VBox();
+         second.setPadding(new Insets(0, 0,0,0));
+         leNiveau.setText("Niveau " + niveaux.get(modelePendu.getNiveau()));
+         leNiveau.setFont(Font.font("Arial", 24));
+         niv.getChildren().addAll(this.leNiveau);
+       
          
-
+         TitledPane ch = new TitledPane();
+         HBox bot = new HBox();
+         bot.setPadding(new Insets(10,100,0,100));
+       
+         this.chrono.setFont(Font.font("Arial",  32));
+         bot.getChildren().addAll(this.chrono);
+         ch.setPadding(new Insets(40, 0, 40, 0));
+         ch.setText("Chronomètre");
+         ch.setCollapsible(false);
+         ch.setContent(bot);
+         
+         this.bJouer.setText("Nouveau mot");
+         second.getChildren().addAll(niv, ch, this.bJouer);
+         second.setPadding(new Insets(10,0,0,75));
          main.getChildren().addAll(first, second);
          res.getChildren().addAll(main);
          return res;
@@ -204,8 +226,8 @@ public class Pendu extends Application {
      private Pane fenetreAccueil(){
         VBox res = new VBox();
         
-        ControleurLancerPartie ctrlLp = new ControleurLancerPartie(modelePendu, this);
-        ControleurNiveau ctrlNiv = new ControleurNiveau(modelePendu);
+        ControleurLancerPartie ctrlLp = new ControleurLancerPartie(this.modelePendu, this);
+        ControleurNiveau ctrlNiv = new ControleurNiveau(this.modelePendu);
         VBox mid = new VBox();
         VBox bot = new VBox();
     
@@ -235,7 +257,7 @@ public class Pendu extends Application {
         normal.setPadding(new Insets(3,0,3,0));
         hard.setPadding(new Insets(3,0,3,0));
         expert.setPadding(new Insets(3,0,3,0));
-
+        
   
 
         bot.getChildren().addAll(easy, normal, hard, expert);
@@ -272,7 +294,7 @@ public class Pendu extends Application {
     /** lance une partie */
     public void lancePartie(){
         
-        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, modelePendu.getNiveau(), 10);
         modeJeu();
     }
 

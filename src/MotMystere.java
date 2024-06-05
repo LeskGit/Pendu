@@ -245,6 +245,11 @@ public class MotMystere {
         return nbNouvelles;
     }
 
+    public boolean isPartieEnCours() {
+        return !this.gagne() && !this.perdu() ;
+    }
+    
+
     /**
      * @return une chaine de caractère donnant l'état du jeu
      */
