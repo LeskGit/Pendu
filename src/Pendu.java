@@ -82,21 +82,26 @@ public class Pendu extends Application {
 
     private Button boutonInfo;
 
-    
+    private String alpha;
 
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
      */
     @Override
     public void init() {
-        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("img");
         this.chrono = new Chronometre();
-        this.clavier = new Clavier(STYLESHEET_CASPIAN, new ControleurLettres(modelePendu, this));
+        this.alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ-";
+        this.clavier = new Clavier(alpha, new ControleurLettres(modelePendu, this));
         this.panelCentral = new BorderPane();
         this.bJouer = new Button("Lancer une partie");
         this.motCrypte = this.modelePendu.getMotCrypte();
+        this.chrono = new Chronometre();
+        this.pg = new ProgressBar(0);
+        this.dessin = new ImageView("pendu0.png");
+        this.leNiveau = new Text();
     }
 
    
@@ -175,9 +180,16 @@ public class Pendu extends Application {
          VBox first = new VBox();
          Label mc = new Label(this.motCrypte);
          mc.setFont(Font.font("Arial", 32));
-         mc.setPadding(new Insets(0,0,0,200));
-         first.getChildren().addAll(mc);
+         mc.setPadding(new Insets(0,0,0,160));
+
+         VBox draw = new VBox();
+         draw.getChildren().addAll(this.dessin);
+         draw.setPadding(new Insets(10,0,0,60));
+         this.pg.setPadding(new Insets(10,0,0,150));
          
+
+         first.getChildren().addAll(mc, draw, this.pg, this.clavier);
+        
          VBox second = new VBox();
          
 
@@ -260,7 +272,7 @@ public class Pendu extends Application {
     /** lance une partie */
     public void lancePartie(){
         
-        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
         modeJeu();
     }
 
