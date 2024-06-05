@@ -1,6 +1,7 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 
 /**
@@ -26,6 +27,8 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
         this.vuePendu = vuePendu;
     }
 
+
+
     /**
      * Actions à effectuer lors du clic sur une touche du clavier
      * Il faut donc: Essayer la lettre, mettre à jour l'affichage et vérifier si la partie est finie
@@ -33,8 +36,47 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent actionEvent) {
-        // A implémenter
-         
-        vuePendu.majAffichage();
+        // Obtenir le bouton source de l'événement
+        Button current = (Button) actionEvent.getSource();
+        
+        // Récupérer la lettre associée au bouton
+        String lettre = current.getText();
+        
+        // Vérifier que la lettre n'est pas vide et a une longueur de 1
+       
+            char lettreChar = lettre.charAt(0); // Convertir la lettre en char
+            
+            // Essayer cette lettre dans le modèle
+            this.modelePendu.essaiLettre(lettreChar);
+            
+            // Mettre à jour l'affichage
+            vuePendu.majAffichage();
+            
+            // Vérifier si la partie est gagnée
+            if (this.modelePendu.gagne()) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Gagné !");
+                alert.setHeaderText(null);
+                alert.setContentText("Félicitations, vous avez gagné !");
+                alert.showAndWait();
+                // Réinitialiser ou lancer une nouvelle partie
+                this.modelePendu.setMotATrouver();
+                vuePendu.majAffichage();
+            } 
+            // Vérifier si la partie est perdue
+            else if (this.modelePendu.perdu()) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Perdu");
+                alert.setHeaderText(null);
+                alert.setContentText("Désolé, vous avez perdu. Le mot était : " + this.modelePendu.getMotATrouve());
+                alert.showAndWait();
+                // Réinitialiser ou lancer une nouvelle partie
+                this.modelePendu.setMotATrouver();
+                vuePendu.majAffichage();
+            }
+        }
     }
-}
+
+
+    
+

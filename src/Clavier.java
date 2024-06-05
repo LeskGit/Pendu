@@ -49,7 +49,13 @@ public class Clavier extends TilePane{
      * permet de désactiver certaines touches du clavier (et active les autres)
      * @param touchesDesactivees une chaine de caractères contenant la liste des touches désactivées
      */
-    public void desactiveTouches(Set<String> touchesDesactivees){
-        // A implémenter
+    public void desactiveTouches(Set<String> touchesDesactivees) {
+        for (Button button : this.clavier) {
+            if (touchesDesactivees.contains(button.getText())) {
+                button.setDisable(true);
+            } else {
+                button.setDisable(false);
+            }
+        }
     }
 }

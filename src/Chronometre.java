@@ -38,7 +38,7 @@ public class Chronometre extends Text{
         this. keyFrame = new KeyFrame(Duration.millis(1000),controleur);
         this. timeline =new Timeline(keyFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        
     }
 
     /**
@@ -49,6 +49,10 @@ public class Chronometre extends Text{
     public void setTime(long tempsMillisec) {
         long secondes = tempsMillisec / 1000;
         super.setText(secondes  + (secondes > 1 ? " s" : ""));
+    }
+
+    public long getElapsedTime() {
+        return tempsEcoule;
     }
 
     /**

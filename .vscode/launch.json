@@ -4,11 +4,12 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "java",
             "name": "Pendu",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/Hacks/OneDrive/Bureau/Dev/lib/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Pendu",
             "projectName": "Pendu_bd28bff0"
         },
@@ -16,7 +17,7 @@
             "type": "java",
             "name": "Pendu",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/Hacks/OneDrive/Bureau/Dev/lib/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Pendu",
             "projectName": "pendu_pour_etu_4ef9979e"
         },
@@ -24,7 +25,7 @@
             "type": "java",
             "name": "Executable",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/Hacks/OneDrive/Bureau/Dev/lib/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Executable",
             "projectName": "pendu_pour_etu_c1127da8"
         },
@@ -32,7 +33,7 @@
             "type": "java",
             "name": "Pendu",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/Hacks/OneDrive/Bureau/Dev/lib/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Pendu",
             "projectName": "pendu_pour_etu_c1127da8"
         },
@@ -40,7 +41,7 @@
             "type": "java",
             "name": "Pendu",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/Hacks/OneDrive/Bureau/Dev/lib/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Pendu",
             "projectName": "pendu_pour_etu_d45775d1"
         }

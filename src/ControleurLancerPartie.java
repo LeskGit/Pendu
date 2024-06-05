@@ -31,17 +31,21 @@ public class ControleurLancerPartie implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent actionEvent) {
-        if (this.modelePendu.isPartieEnCours()) {
+        if (this.vuePendu.getChrono().getElapsedTime() > 0) {
             Optional<ButtonType> reponse = this.vuePendu.popUpPartieEnCours().showAndWait();
             // si la réponse est oui
             if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)) {
                 System.out.println("Nouvelle partie lancée !");
                 this.vuePendu.lancePartie();
+                this.vuePendu.getChrono().resetTime();
+                this.vuePendu.getChrono().start();
             } else {
                 System.out.println("Partie en cours maintenue.");
             }
         } else {
             this.vuePendu.lancePartie();
+            this.vuePendu.getChrono().resetTime();
+            this.vuePendu.getChrono().start();
         }
     }
 }

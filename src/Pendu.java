@@ -46,7 +46,7 @@ public class Pendu extends Application {
     /**
      * le mot à trouver avec les lettres déjà trouvé
      */
-    private String motCrypte;
+    private Text motCrypte;
     /**
      * la barre de progression qui indique le nombre de tentatives
      */
@@ -89,7 +89,7 @@ public class Pendu extends Application {
      */
     @Override
     public void init() {
-        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("img");
         this.chrono = new Chronometre();
@@ -97,7 +97,7 @@ public class Pendu extends Application {
         this.clavier = new Clavier(alpha, new ControleurLettres(modelePendu, this));
         this.panelCentral = new BorderPane();
         this.bJouer = new Button("Lancer une partie");
-        this.motCrypte = this.modelePendu.getMotCrypte();
+        this.motCrypte = new Text("");
         this.chrono = new Chronometre();
         this.pg = new ProgressBar(0);
         this.dessin = new ImageView("pendu0.png");
@@ -179,9 +179,9 @@ public class Pendu extends Application {
          HBox main = new HBox();
 
          VBox first = new VBox();
-         Label mc = new Label(this.motCrypte);
-         mc.setFont(Font.font("Arial", 32));
-         mc.setPadding(new Insets(0,0,0,160));
+         this.motCrypte.setText(this.modelePendu.getMotCrypte());
+         this.motCrypte.setFont(Font.font("Arial", 32));
+        
 
          VBox draw = new VBox();
          draw.getChildren().addAll(this.dessin);
@@ -191,7 +191,7 @@ public class Pendu extends Application {
          
       
 
-         first.getChildren().addAll(mc, draw, this.pg, this.clavier);
+         first.getChildren().addAll(this.motCrypte, draw, this.pg, this.clavier);
         
          VBox second = new VBox();
          VBox niv = new VBox();
@@ -294,16 +294,27 @@ public class Pendu extends Application {
     /** lance une partie */
     public void lancePartie(){
         
-        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, modelePendu.getNiveau(), 10);
+        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, modelePendu.getNiveau(), 10);
         modeJeu();
     }
 
     /**
      * raffraichit l'affichage selon les données du modèle
      */
-    public void majAffichage(){
-        // A implementer
-    }
+    /**
+ * raffraichit l'affichage selon les données du modèle
+ */
+/**
+ * rafraîchit l'affichage selon les données du modèle
+ */
+public void majAffichage(){
+    this.clavier.desactiveTouches(this.modelePendu.getLettresEssayees());
+    this.motCrypte.setText(this.modelePendu.getMotCrypte());
+    this.dessin.setImage(lesImages.get(this.modelePendu.getNbErreursMax()-this.modelePendu.getNbErreursRestants()));
+    this.pg.setProgress(((double)(this.modelePendu.getNbErreursMax()*10-this.modelePendu.getNbErreursRestants()*100/this.modelePendu.getNbErreursMax()))/100);
+}
+
+
 
     /**
      * accesseur du chronomètre (pour les controleur du jeu)
