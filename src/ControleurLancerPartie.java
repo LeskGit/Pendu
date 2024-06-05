@@ -37,8 +37,11 @@ public class ControleurLancerPartie implements EventHandler<ActionEvent> {
             if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)) {
                 System.out.println("Nouvelle partie lancée !");
                 this.vuePendu.lancePartie();
+                this.modelePendu.setMotATrouver();
+                this.vuePendu.majAffichage();
                 this.vuePendu.getChrono().resetTime();
                 this.vuePendu.getChrono().start();
+                
             } else {
                 System.out.println("Partie en cours maintenue.");
             }

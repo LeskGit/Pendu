@@ -89,7 +89,7 @@ public class Pendu extends Application {
      */
     @Override
     public void init() {
-        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        this.modelePendu = new MotMystere("src/dict.txt", 3, 10, MotMystere.FACILE, 10);
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("img");
         this.chrono = new Chronometre();
@@ -100,7 +100,7 @@ public class Pendu extends Application {
         this.motCrypte = new Text("");
         this.chrono = new Chronometre();
         this.pg = new ProgressBar(0);
-        this.dessin = new ImageView("pendu0.png");
+        this.dessin = new ImageView(lesImages.get(0));
         this.leNiveau = new Text();
         this.niveaux = Arrays.asList("Facile", "Normal", "Difficile", "Expert");
     }
@@ -136,8 +136,10 @@ public class Pendu extends Application {
 
         Text titre = new Text("Jeu du Pendu");
         this.boutonMaison = new Button();
+        this.boutonMaison.setOnAction(new RetourAccueil(modelePendu, this));
         this.boutonParametres = new Button();
         this.boutonInfo = new Button();
+        this.boutonInfo.setOnAction(new ControleurInfos(this));
         ImageView imageMaison = new ImageView("home.png");
         ImageView imageParam = new ImageView("parametres.png");
         ImageView imageInfo = new ImageView("info.png");
@@ -179,19 +181,26 @@ public class Pendu extends Application {
          HBox main = new HBox();
 
          VBox first = new VBox();
-         this.motCrypte.setText(this.modelePendu.getMotCrypte());
+         
          this.motCrypte.setFont(Font.font("Arial", 32));
+        this.motCrypte.setText(this.modelePendu.getMotCrypte());
         
 
          VBox draw = new VBox();
          draw.getChildren().addAll(this.dessin);
          draw.setPadding(new Insets(10,0,0,60));
          this.pg.setPadding(new Insets(10,0,0,150));
+         this.pg.setPrefWidth(300);
+        
+         VBox crypte = new VBox();
+         crypte.getChildren().addAll(this.motCrypte);
+         crypte.setPadding(new Insets(10,0,0,80));
+        
         
          
       
 
-         first.getChildren().addAll(this.motCrypte, draw, this.pg, this.clavier);
+         first.getChildren().addAll(crypte, draw, this.pg, this.clavier);
         
          VBox second = new VBox();
          VBox niv = new VBox();
@@ -237,6 +246,7 @@ public class Pendu extends Application {
         diff.setPadding(new Insets(20, 0, 0, 0));
         diff.setText("Niveau de difficulté");
         diff.setCollapsible(false);
+        this.bJouer.setText("Lancer une partie");
         
         ToggleGroup tgl = new ToggleGroup();
         
@@ -288,13 +298,13 @@ public class Pendu extends Application {
     }
     
     public void modeParametres(){
-        // A implémenter
+        // Aucune idee de quoi mettre
     }
 
     /** lance une partie */
     public void lancePartie(){
         
-        this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, modelePendu.getNiveau(), 10);
+       
         modeJeu();
     }
 
@@ -333,7 +343,8 @@ public void majAffichage(){
         
     public Alert popUpReglesDuJeu(){
         // A implementer
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla");
+        alert.setTitle("Règle du jeu");
         return alert;
     }
     
